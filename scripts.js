@@ -2,8 +2,8 @@
 const lista = document.getElementById("lista");
 
 //Constante endpoint API do backend
-// const apiUrl = "https://jogosnft.herokuapp.com";
-const apiUrl = "http://localhost:3000";
+const apiUrl = "https://jogosnft.herokuapp.com";
+// const apiUrl = "http://localhost:3000";
 
 //Modo de edição
 let edicao = false;
