@@ -2,7 +2,8 @@
 const lista = document.getElementById("lista");
 
 //Constante endpoint API do backend
-const apiUrl = "https://jogosnft.herokuapp.com";
+// const apiUrl = "https://jogosnft.herokuapp.com";
+const apiUrl = "http://localhost:3000";
 
 //Modo de edição
 let edicao = false;
@@ -25,6 +26,12 @@ const getJogos = async () => {
 
   //Iterando resultado da API com map
   jogos.map((jogo) => {
+    let joguei = "";
+    if (jogo.jogado == true) {
+      joguei = "Joguei";
+    } else {
+      joguei = "Não joguei";
+    }
     lista.insertAdjacentHTML(
       "beforeend",
       `
@@ -32,10 +39,16 @@ const getJogos = async () => {
           <div class="card">
           <img src="${jogo.imagem}" class="card-img-top" alt="...">
           <div class="card-body">
-              <h5 class="card-title">${jogo.titulo} - ${jogo.genero}</h5>
-              <span class="badge bg-primary">${jogo.nota}</span>
-              <p class="card-text">${jogo.jogado}</p>               
-              <div>
+                <div class="info">
+                    <h5 class="card-title">${jogo.titulo} </h5>
+                    <span class="badge bg-primary" id="card-nota">${jogo.nota}</span>
+                </div>
+                <div class="info">
+                    <h5 class="card-text">Genero:</h5>
+                    <p class="card-text">${jogo.genero}</p>
+                </div>
+                <p class="card-text">${joguei}</p>                               
+                <div>
                   <button class="btn btn-primary" onclick="editJogo('${jogo.id}')">Editar</button>
                   <button class="btn btn-danger" onclick="deleteJogo('${jogo.id}')">Excluir</button>
               </div>
@@ -60,7 +73,7 @@ const submitForm = async (event) => {
     genero: genero.value,
     imagem: imagem.value,
     nota: parseInt(nota.value),
-    jogado: jogado.value,
+    jogado: jogado.checked,
   };
 
   //Preenche o objeto com valores do input
@@ -158,7 +171,11 @@ const editJogo = async (id) => {
   genero.value = jogo.genero;
   imagem.value = jogo.imagem;
   nota.value = jogo.nota;
-  jogado.value = jogo.jogado;
+  if (jogo.jogado == true) {
+    jogado.checked = true;
+  } else {
+    jogado.checked = false;
+  }
 };
 
 //Função para limpar Formlário
@@ -167,7 +184,7 @@ const clearFields = () => {
   genero.value = "";
   imagem.value = "";
   nota.value = "";
-  jogado.value = "";
+  jogado.checked = false;
 };
 
 getJogos();

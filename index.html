@@ -15,7 +15,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand" href="#">Jogos NFT</a>
           <button
@@ -47,7 +47,7 @@
                     <div class="col-4">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="titulo" placeholder="Digite o seu titulo." required >
-                            <label for="titulo">Titulo</label>
+                            <label for="titulo">Título</label>
                         </div>
                     </div>
                     <div class="col-4">
@@ -71,14 +71,14 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="jogado" placeholder="Digite a jogado">
-                            <label for="jogado">Jogado</label>
-                        </div>
-                    </div>                  
-                </div>
-                <div class="row">
-                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="jogado">
+                            <label class="form-check-label" for="jogado">
+                                Joguei
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col-4">
                         <div class="d-grid gap-2 d-md-block">
                             <button class="btn btn-success" type="submit">Enviar</button>
                             <button class="btn btn-outline-danger" type="button">cancelar</button>
@@ -92,7 +92,7 @@
             </div>
         </section>
     </main>
-    <footer class="bg-primary py-2">
+    <footer class="bg-dark py-2">
       <p class="text-white text-center mb-0">Desenvolvido por Adriano Lamas</p>
     </footer>
     <script src="scripts.js"></script>
