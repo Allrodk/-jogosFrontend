@@ -16,6 +16,8 @@ let imagem = document.getElementById("imagem");
 let nota = document.getElementById("nota");
 let jogado = document.getElementById("jogado");
 
+let listaCheia = true;
+
 //Requisição GET para listar o jogos cadastrados no backend
 const getJogos = async () => {
   // FETCH API = responsavel por comunicar requisições HTTP
@@ -24,21 +26,26 @@ const getJogos = async () => {
   const jogos = await response.json();
   console.log(jogos);
 
+  let joguei = "";
   //Iterando resultado da API com map
   jogos.map((jogo) => {
-    let joguei = "";
-    if (jogo.jogado == true) {
-      joguei = "Joguei";
-    } else {
-      joguei = "Não joguei";
-    }
-    lista.insertAdjacentHTML(
-      "beforeend",
-      `
-          <div class="col">
-          <div class="card">
-          <img src="${jogo.imagem}" class="card-img-top" alt="...">
-          <div class="card-body">
+    listaJogos(jogo, joguei);
+  });
+};
+
+function listaJogos(jogo, joguei) {
+  if (jogo.jogado == true) {
+    joguei = "Joguei";
+  } else {
+    joguei = "Não joguei";
+  }
+  lista.insertAdjacentHTML(
+    "beforeend",
+    `              
+    <div class="col">
+        <div class="card">
+            <img src="${jogo.imagem}" class="card-img-top" alt="...">
+            <div class="card-body">                
                 <div class="info">
                     <h5 class="card-title">${jogo.titulo} </h5>
                     <span class="badge bg-primary" id="card-nota">${jogo.nota}</span>
@@ -47,19 +54,18 @@ const getJogos = async () => {
                     <h5 class="card-text">Genero:</h5>
                     <p class="card-text">${jogo.genero}</p>
                 </div>
-                <p class="card-text">${joguei}</p>                               
+                <p class="card-text">${joguei}</p>                                             
                 <div>
-                  <button class="btn btn-primary" onclick="editJogo('${jogo.id}')">Editar</button>
-                  <button class="btn btn-danger" onclick="deleteJogo('${jogo.id}')">Excluir</button>
-              </div>
-          </div>
-          </div>
-      </div>
-          `
-    );
-  });
-};
-
+                    <button class="btn btn-primary" onclick="editJogo('${jogo.id}')">Editar</button>
+                    <button class="btn btn-danger" onclick="deleteJogo('${jogo.id}')">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+          
+      `
+  );
+}
 //------------------------------------------------------------------------
 
 // POST envia um jogo para ser cadastrado no backend
